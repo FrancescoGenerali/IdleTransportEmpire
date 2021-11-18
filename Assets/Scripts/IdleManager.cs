@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class IdleManager : MonoBehaviour
 {
+    void Start()
+    {
+        StartCoroutine(autosave());
+    }
+
     //SOLO TESTING CODE
     public GameObject bike;
     public GameObject bus;
@@ -21,5 +26,19 @@ public class IdleManager : MonoBehaviour
         busOwn.text = "busOwn " + bus.GetComponent<SelectBuild>().owned.ToString();
         bikOwn.text = "bikeOwn " + bike.GetComponent<SelectBuild>().owned.ToString();
         money.text = Data.currency.ToString();
+    }
+
+    public void resetSave()
+    {
+        SaveAndLoad.resetSave();
+    }
+
+    IEnumerator autosave()
+    {
+        for(;;)
+        {
+            SaveAndLoad.SaveToJson();
+            yield return new WaitForSeconds(1);
+        }
     }
 }
