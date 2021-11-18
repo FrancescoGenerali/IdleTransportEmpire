@@ -18,6 +18,8 @@ public class IdleManager : MonoBehaviour
     public Text busOwn;
     public Text bikOwn;
     public Text money;
+    public Text busCost;
+    public Text bikeCost;
     
     void Update()
     {
@@ -26,6 +28,13 @@ public class IdleManager : MonoBehaviour
         busOwn.text = "busOwn " + bus.GetComponent<SelectBuild>().owned.ToString();
         bikOwn.text = "bikeOwn " + bike.GetComponent<SelectBuild>().owned.ToString();
         money.text = Data.currency.ToString();
+        busCost.text = bus.GetComponent<SelectBuild>().calculateCost().ToString();
+        bikeCost.text = bike.GetComponent<SelectBuild>().calculateCost().ToString();
+
+        //CHEAT AUMENTA SOLDI
+        if (Input.GetKeyDown(KeyCode.P)){
+            Data.currency += 1 + Data.currency * 2;
+        }
     }
 
     public void resetSave()

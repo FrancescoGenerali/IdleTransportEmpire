@@ -26,6 +26,16 @@ public class SelectBuild : MonoBehaviour
         StartCoroutine(gainCurrency());
     }
 
+    public void buy()
+    {
+        double cost = calculateCost();
+        if (Data.currency >= cost)
+        {
+            raiseOwned();
+            Data.currency -= cost;
+        }
+    }
+
     public void raiseOwned()
     {
         owned++;
@@ -39,6 +49,11 @@ public class SelectBuild : MonoBehaviour
     public double calculateProductivity()
     {
         return thisBuildType.initialProductivity * owned * multiplier;
+    }
+
+    public double calculateCost()
+    {
+        return thisBuildType.initialCost * Mathf.Pow(thisBuildType.coefficient, owned);
     }
 
     IEnumerator gainCurrency()
