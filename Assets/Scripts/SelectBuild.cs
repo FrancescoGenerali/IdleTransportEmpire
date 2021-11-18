@@ -36,11 +36,16 @@ public class SelectBuild : MonoBehaviour
         }
     }
 
+    public double calculateProductivity()
+    {
+        return thisBuildType.initialProductivity * owned * multiplier;
+    }
+
     IEnumerator gainCurrency()
     {
         for(;;)
         {
-            Data.currency += thisBuildType.initialProductivity * owned * multiplier;
+            Data.currency += calculateProductivity();
             yield return new WaitForSeconds(productionTime);
         }
     }

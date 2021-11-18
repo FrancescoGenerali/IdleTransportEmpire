@@ -34,17 +34,19 @@ public class SaveAndLoad : MonoBehaviour
         string json = File.ReadAllText(Application.dataPath + "/Progress.json");
         JsonData dataJ = JsonUtility.FromJson<JsonData>(json);
 
-        Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds -3600) * 2); //AL POSTO DEL 2 CI VA LA PRODUZIONE MEDIA AL SEC. 3600 fixes one hour late during conversion
-        Data.prestige = dataJ.prestige;
-        Data.actualScene = dataJ.actualScene;
-
         var buildingInScene = GameObject.FindGameObjectsWithTag("Building");
-
+        Data.actualProduction = 0;
+        
         for (int i = 0; i < dataJ.listBuild.Length; i++)
         {
             buildingInScene[i].GetComponent<SelectBuild>().owned = dataJ.listBuild[i].owned;
             buildingInScene[i].GetComponent<SelectBuild>().multiplier = dataJ.listBuild[i].multiplier;
+            Data.actualProduction += buildingInScene[i].GetComponent<SelectBuild>().calculateProductivity();
         }
+
+        Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds -3600) * Data.actualProduction); //3600 fixes one hour late during conversion
+        Data.prestige = dataJ.prestige;
+        Data.actualScene = dataJ.actualScene;
     }
 }
 
