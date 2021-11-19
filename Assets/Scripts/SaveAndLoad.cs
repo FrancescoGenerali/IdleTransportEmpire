@@ -11,7 +11,7 @@ public static class SaveAndLoad
         JsonData dataJ = new JsonData();
         dataJ.currency = Data.currency;
         dataJ.prestige = Data.prestige;
-        dataJ.actualScene = Data.actualScene;
+        dataJ.actualSceneNumber = Data.actualScene;
 
         var buildingInScene = GameObject.FindGameObjectsWithTag("Building");
         dataJ.listBuild = new BuildJ[buildingInScene.Length];
@@ -19,9 +19,9 @@ public static class SaveAndLoad
         for (int i = 0; i < buildingInScene.Length; i++)
         {
             dataJ.listBuild[i] = new BuildJ();
-            dataJ.listBuild[i].owned = buildingInScene[i].GetComponent<SelectBuild>().owned;
-            dataJ.listBuild[i].multiplier = buildingInScene[i].GetComponent<SelectBuild>().multiplier;
-            dataJ.listBuild[i].productionTime = buildingInScene[i].GetComponent<SelectBuild>().productionTime;
+            dataJ.listBuild[i].owned = buildingInScene[i].GetComponent<BuildingManager>().owned;
+            dataJ.listBuild[i].multiplier = buildingInScene[i].GetComponent<BuildingManager>().multiplier;
+            dataJ.listBuild[i].productionTime = buildingInScene[i].GetComponent<BuildingManager>().productionTime;
         }
 
         dataJ.jLastLog = DateTime.Now.ToFileTimeUtc(); //DateTime need conversion 'cause isn't serializable
@@ -40,15 +40,15 @@ public static class SaveAndLoad
         
         for (int i = 0; i < dataJ.listBuild.Length; i++)
         {
-            buildingInScene[i].GetComponent<SelectBuild>().owned = dataJ.listBuild[i].owned;
-            buildingInScene[i].GetComponent<SelectBuild>().multiplier = dataJ.listBuild[i].multiplier;
-            buildingInScene[i].GetComponent<SelectBuild>().productionTime = dataJ.listBuild[i].productionTime;
-            Data.actualProduction += buildingInScene[i].GetComponent<SelectBuild>().calculateProductivity();
+            buildingInScene[i].GetComponent<BuildingManager>().owned = dataJ.listBuild[i].owned;
+            buildingInScene[i].GetComponent<BuildingManager>().multiplier = dataJ.listBuild[i].multiplier;
+            buildingInScene[i].GetComponent<BuildingManager>().productionTime = dataJ.listBuild[i].productionTime;
+            Data.actualProduction += buildingInScene[i].GetComponent<BuildingManager>().calculateProductivity();
         }
 
         Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds -3600) * Data.actualProduction); //3600 fixes one hour late during conversion
         Data.prestige = dataJ.prestige;
-        Data.actualScene = dataJ.actualScene;
+        Data.actualScene = dataJ.actualSceneNumber;
     }
 
     public static void resetSave()
@@ -63,8 +63,7 @@ public static class SaveAndLoad
 
         for (int i = 0; i < buildingInScene.Length; i++)
         {
-            buildingInScene[i].GetComponent<SelectBuild>().owned = 0;
-            buildingInScene[i].GetComponent<SelectBuild>().multiplier = 1;
+            buildingInScene[i].GetComponent<BuildingManager>().initialReset();
         }
 
         string json = JsonUtility.ToJson(newDataJ, true);
@@ -77,7 +76,7 @@ public class JsonData
 {
     public double currency;
     public int prestige;
-    public int actualScene;
+    public int actualSceneNumber;
     public long jLastLog;
     public BuildJ[] listBuild;
 }
