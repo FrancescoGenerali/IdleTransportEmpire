@@ -21,6 +21,7 @@ public static class SaveAndLoad
             dataJ.listBuild[i] = new BuildJ();
             dataJ.listBuild[i].owned = buildingInScene[i].GetComponent<SelectBuild>().owned;
             dataJ.listBuild[i].multiplier = buildingInScene[i].GetComponent<SelectBuild>().multiplier;
+            dataJ.listBuild[i].productionTime = buildingInScene[i].GetComponent<SelectBuild>().productionTime;
         }
 
         dataJ.jLastLog = DateTime.Now.ToFileTimeUtc(); //DateTime need conversion 'cause isn't serializable
@@ -41,6 +42,7 @@ public static class SaveAndLoad
         {
             buildingInScene[i].GetComponent<SelectBuild>().owned = dataJ.listBuild[i].owned;
             buildingInScene[i].GetComponent<SelectBuild>().multiplier = dataJ.listBuild[i].multiplier;
+            buildingInScene[i].GetComponent<SelectBuild>().productionTime = dataJ.listBuild[i].productionTime;
             Data.actualProduction += buildingInScene[i].GetComponent<SelectBuild>().calculateProductivity();
         }
 
@@ -85,4 +87,5 @@ public class BuildJ
 {
     public int owned;
     public int multiplier;
+    public float productionTime;
 }

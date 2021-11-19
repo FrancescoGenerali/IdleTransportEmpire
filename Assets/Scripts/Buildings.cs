@@ -12,8 +12,6 @@ public class Buildings : ScriptableObject
     public float coefficient;
     [Tooltip("Amount of seconds to produce something. Without bonus.")]
     public float initialTime;
-    [Tooltip("Amount of product at the end of the cycle of production.")]
+    [Tooltip("Amount of product at the end of the cycle of production. It doesn't change")]
     public float initialRevenue;
-    [Tooltip("Amount of currency the business makes per second. Without bonus")]
-    public float initialProductivity;
 }

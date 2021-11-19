@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class IdleManager : MonoBehaviour
 {
@@ -40,6 +41,13 @@ public class IdleManager : MonoBehaviour
     public void resetSave()
     {
         SaveAndLoad.resetSave();
+    }
+
+    public void nextScene()
+    {
+        Data.currency = 0;
+        Data.actualScene++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator autosave()

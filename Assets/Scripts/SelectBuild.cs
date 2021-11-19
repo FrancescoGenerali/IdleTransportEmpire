@@ -9,8 +9,8 @@ public class SelectBuild : MonoBehaviour
 
     [HideInInspector]
     public int owned, multiplier;
-
-    private float productionTime;
+    [HideInInspector]
+    public float productionTime;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class SelectBuild : MonoBehaviour
 
     public double calculateProductivity()
     {
-        return thisBuildType.initialProductivity * owned * multiplier;
+        return (thisBuildType.initialRevenue / productionTime) * owned * multiplier;
     }
 
     public double calculateCost()
