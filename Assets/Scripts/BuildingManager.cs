@@ -11,21 +11,27 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI costUI, ownedUI, productivityUI;
+    [SerializeField]
+    private Image nextMultBar;
 
     [HideInInspector]
-    public int owned, multiplier;
+    public int owned, multiplier, nextMult;
     [HideInInspector]
     public float productionTime;
     [HideInInspector]
     public double cost;
+    [HideInInspector]
+    public bool reachMax;
+
+    //Need for fillbar
+    private int barCount, prevNextMult;
 
     private void Awake()
     {
         if (productionTime == 0)
-            productionTime = thisBuildType.initialTime;
-        
-        if (multiplier == 0)
-            multiplier = 1;
+        {
+            initialReset();
+        }
     }
 
     private void Start()
@@ -37,29 +43,57 @@ public class BuildingManager : MonoBehaviour
 
     public void buy()
     {
-        if (Data.currency >= cost)
+        if (Data.currency >= cost && !reachMax)
         {
             raiseOwned();
             Data.currency -= cost;
+            cost = calculateCost();
+            updateUI();
         }
-        cost = calculateCost();
-        updateUI();
     }
 
     public void updateUI()
     {
-        costUI.text = cost.ToString();
+        if (reachMax)
+            costUI.text = "MAX";
+        else
+            costUI.text = cost.ToString();
+
         ownedUI.text = owned.ToString();
+        nextMultBar.fillAmount = (float)barCount/(nextMult-prevNextMult);
         productivityUI.text = calculateProductivity().ToString();
     }
 
     public void raiseOwned()
     {
         owned++;
-        if (owned == 25 || owned == 50 || owned == 100 || owned == 200 || owned == 300 || owned == 400)
+        barCount++;
+        if (owned == nextMult)
         {
+            reachNextMult();
             productionTime /= 2;
             multiplier++;
+        }
+    }
+
+    public void reachNextMult()
+    {
+        if (!(nextMult == thisBuildType.nextMult[thisBuildType.nextMult.Length - 1]))
+        {
+            for (int i = 0; i < thisBuildType.nextMult.Length - 1; i++)
+            {
+                if (nextMult == thisBuildType.nextMult[i])
+                {
+                    prevNextMult = nextMult;
+                    nextMult = thisBuildType.nextMult[i + 1];
+                    barCount = 0;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            reachMax = true;
         }
     }
 
@@ -86,6 +120,9 @@ public class BuildingManager : MonoBehaviour
     {
         owned = 0;
         multiplier = 1;
+        barCount = 0;
+        prevNextMult = 0;
+        nextMult = thisBuildType.nextMult[0];
         productionTime = thisBuildType.initialTime;
         cost = calculateCost();
         updateUI();

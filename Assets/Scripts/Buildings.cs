@@ -14,4 +14,7 @@ public class Buildings : ScriptableObject
     public float initialTime;
     [Tooltip("Amount of product at the end of the cycle of production. It doesn't change")]
     public float initialRevenue;
+
+    [HideInInspector]
+    public int[] nextMult = {25, 50, 100, 200, 300, 400 };
 }

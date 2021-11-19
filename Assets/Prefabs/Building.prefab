@@ -352,6 +352,7 @@ MonoBehaviour:
   costUI: {fileID: 8192597186789921461}
   ownedUI: {fileID: 8192597187998423763}
   productivityUI: {fileID: 8192597186575111234}
+  nextMultBar: {fileID: 8192597187968388963}
   owned: 0
   multiplier: 0
   productionTime: 0
