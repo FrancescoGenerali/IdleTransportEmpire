@@ -16,7 +16,7 @@ public class IdleManager : MonoBehaviour
     
     void Update()
     {
-        money.text = Data.currency.ToString();
+        money.text = CashConverter.doubleToString(Data.currency);
 
         //CHEAT AUMENTA SOLDI
         if (Input.GetKeyDown(KeyCode.P)){

@@ -57,11 +57,11 @@ public class BuildingManager : MonoBehaviour
         if (reachMax)
             costUI.text = "MAX";
         else
-            costUI.text = cost.ToString();
+            costUI.text = CashConverter.doubleToString(cost);
 
         ownedUI.text = owned.ToString();
         nextMultBar.fillAmount = (float)barCount/(nextMult-prevNextMult);
-        productivityUI.text = calculateProductivity().ToString();
+        productivityUI.text = CashConverter.doubleToString(calculateProductivity());
     }
 
     public void raiseOwned()
