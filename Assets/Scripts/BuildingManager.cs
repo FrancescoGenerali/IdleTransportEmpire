@@ -99,7 +99,7 @@ public class BuildingManager : MonoBehaviour
 
     public double calculateProductivity()
     {
-        return (thisBuildType.initialRevenue / productionTime) * owned * multiplier;
+        return (thisBuildType.initialRevenue / productionTime) * owned * multiplier *Data.bonusPrestige;
     }
 
     public double calculateCost()
