@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class IdleManager : MonoBehaviour
@@ -19,17 +18,10 @@ public class IdleManager : MonoBehaviour
     {
         StartCoroutine(autosave());
     }
-
-    //SOLO TESTING CODE
-    public Text money;
-    public Text prestige;
     
     void Update()
     {
-        money.text = CashConverter.doubleToString(Data.currency);
-        prestige.text = CashConverter.doubleToString(Data.prestige);
-        Debug.Log(Data.bonusPrestige);
-        //CHEAT AUMENTA SOLDI
+        //CHEAT DOUBLE MONEY
         if (Input.GetKeyDown(KeyCode.P)){
             Data.currency += 1 + Data.currency * 2;
         }
