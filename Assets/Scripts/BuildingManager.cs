@@ -12,7 +12,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI costUI, ownedUI, productivityUI;
     [SerializeField]
-    private Image nextMultBar;
+    private GameObject nextMultBar;
 
     [HideInInspector]
     public int owned, multiplier, nextMult;
@@ -60,7 +60,7 @@ public class BuildingManager : MonoBehaviour
             costUI.text = CashConverter.doubleToString(cost);
 
         ownedUI.text = owned.ToString();
-        nextMultBar.fillAmount = (float)barCount/(nextMult-prevNextMult);
+        nextMultBar.GetComponent<Slider>().value = (float)barCount/(nextMult-prevNextMult);
         productivityUI.text = CashConverter.doubleToString(calculateProductivity());
     }
 
