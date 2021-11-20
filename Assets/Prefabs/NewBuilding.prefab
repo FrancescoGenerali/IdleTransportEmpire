@@ -162,8 +162,8 @@ RectTransform:
   m_GameObject: {fileID: 57032110264410010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.0025, z: 0.01}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 57032110261773034}
   - {fileID: 8192597186844238675}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 4378807339312249438}
   - component: {fileID: 4378807339312249426}
   m_Layer: 0
-  m_Name: Building
+  m_Name: NewBuilding
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,8 +265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4378807339312249437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 57032110264410014}
@@ -355,8 +355,10 @@ MonoBehaviour:
   nextMultBar: {fileID: 8192597187968388963}
   owned: 0
   multiplier: 0
+  nextMult: 0
   productionTime: 0
   cost: 0
+  reachMax: 0
 --- !u!1 &8192597185968701771
 GameObject:
   m_ObjectHideFlags: 0

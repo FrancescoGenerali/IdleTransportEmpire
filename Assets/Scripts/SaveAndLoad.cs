@@ -36,17 +36,17 @@ public static class SaveAndLoad
         JsonData dataJ = JsonUtility.FromJson<JsonData>(json);
 
         var buildingInScene = GameObject.FindGameObjectsWithTag("Building");
-        Data.actualProduction = 0;
+        Data.totalProduction = 0;
         
         for (int i = 0; i < dataJ.listBuild.Length; i++)
         {
             buildingInScene[i].GetComponent<BuildingManager>().owned = dataJ.listBuild[i].owned;
             buildingInScene[i].GetComponent<BuildingManager>().multiplier = dataJ.listBuild[i].multiplier;
             buildingInScene[i].GetComponent<BuildingManager>().productionTime = dataJ.listBuild[i].productionTime;
-            Data.actualProduction += buildingInScene[i].GetComponent<BuildingManager>().calculateProductivity();
+            Data.totalProduction += buildingInScene[i].GetComponent<BuildingManager>().calculateProductivity();
         }
 
-        Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds -3600) * Data.actualProduction); //3600 fixes one hour late during conversion
+        Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds -3600) * Data.totalProduction); //3600 fixes one hour late during conversion
         Data.prestige = dataJ.prestige;
         Data.actualScene = dataJ.actualSceneNumber;
     }

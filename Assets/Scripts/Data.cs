@@ -5,7 +5,7 @@ using UnityEngine;
 public static class Data
 {
     public static double currency;
-    public static double actualProduction;
+    public static double totalProduction;
     public static int prestige;
     public static float bonusPrestige;
     public static int actualScene;
@@ -21,5 +21,14 @@ public static class Data
             tempPrestige--;
         }
         return bonusPrestige;
+    }
+
+    public static double calculateTotalProduction(GameObject[] buildingInScene)
+    {
+        foreach (GameObject building in buildingInScene)
+        {
+            totalProduction += building.GetComponent<BuildingManager>().calculateProductivity();
+        }
+        return totalProduction;
     }
 }

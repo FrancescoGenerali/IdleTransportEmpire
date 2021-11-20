@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class IdleManager : MonoBehaviour
 {
+    private double totalProduction;
+    
     private void Awake()
     {
         if (Data.prestige == 0)
@@ -21,10 +24,21 @@ public class IdleManager : MonoBehaviour
     
     void Update()
     {
-        //CHEAT DOUBLE MONEY
-        if (Input.GetKeyDown(KeyCode.P)){
+        //------CHEAT------//
+
+        // DOUBLE MONEY
+        if (Input.GetKeyDown(KeyCode.M)){
             Data.currency += 1 + Data.currency * 2;
         }
+
+        //ONE HOUR AHEAD
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GameObject[] Buildings = GameObject.FindGameObjectsWithTag("Building");
+            Data.currency += (DateTime.Now.AddHours(1) - DateTime.Now).TotalSeconds * Data.calculateTotalProduction(Buildings);
+        }
+
+        //-----------------//
     }
 
     public void nextScene()
