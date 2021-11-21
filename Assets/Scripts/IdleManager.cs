@@ -40,12 +40,6 @@ public class IdleManager : MonoBehaviour
             Data.currency += (DateTime.Now.AddHours(1) - DateTime.Now).TotalSeconds * Data.calculateTotalProduction(Buildings);
         }
 
-        //Erase Data
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            resetSave();
-        }
-
         //-----------------//
     }
 
@@ -56,12 +50,6 @@ public class IdleManager : MonoBehaviour
         Data.updateBonusPrestige();
         Data.actualScene++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void resetSave()
-    {
-        SceneManager.LoadScene(0);
-        SaveAndLoad.resetSave();
     }
 
     IEnumerator autosave()

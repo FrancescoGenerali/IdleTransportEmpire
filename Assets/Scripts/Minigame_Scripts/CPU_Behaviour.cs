@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CPU_Behaviour : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class CPU_Behaviour : MonoBehaviour
     {
         if (other.CompareTag("MG_Goal") && numberOfPassengers == 0)
         {
-            Debug.Log("Fine!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else if (other.CompareTag("MG_Start"))
         {

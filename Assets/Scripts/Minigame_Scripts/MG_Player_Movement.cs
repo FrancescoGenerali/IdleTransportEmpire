@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MG_Player_Movement : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class MG_Player_Movement : MonoBehaviour
     {
         if (other.CompareTag("MG_Goal") && numberOfPassengers == 0)
         {
-            Debug.Log("Fine!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else if (other.CompareTag("MG_Start"))
         {

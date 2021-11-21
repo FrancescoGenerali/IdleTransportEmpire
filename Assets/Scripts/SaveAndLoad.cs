@@ -43,13 +43,17 @@ public static class SaveAndLoad
         JsonData dataJ = JsonUtility.FromJson<JsonData>(json);
 
         Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds - 3600) * Data.totalProduction); //3600 fixes one hour late during conversion
+        
+        if (double.IsNaN(Data.currency))
+            Data.currency = dataJ.currency; //this bug happened just one time and I wasn't able to replicate it
+        
         Data.prestige = dataJ.prestige;
         Data.bonusPrestige = dataJ.bonusPrestige;
         Data.actualScene = dataJ.actualSceneNumber;
 
         haveToLoad = true;
 
-        SceneManager.LoadScene(Data.actualScene + 1);
+        SceneManager.LoadScene("Idle_" + (Data.actualScene + 1).ToString());
     }
 
     public static void LoadFromJson()
@@ -72,25 +76,6 @@ public static class SaveAndLoad
         }
 
         haveToLoad = false;
-    }
-
-    public static void resetSave()
-    {
-        JsonData newDataJ = new JsonData();
-
-        Data.currency = 0;
-        Data.prestige = 0;
-        Data.actualScene = 0;
-
-        var buildingInScene = GameObject.FindGameObjectsWithTag("Building");
-
-        for (int i = 0; i < buildingInScene.Length; i++)
-        {
-            buildingInScene[i].GetComponent<BuildingManager>().initialReset();
-        }
-
-        string json = JsonUtility.ToJson(newDataJ, true);
-        File.WriteAllText(Application.dataPath + "/Progress.json", json);
     }
 }
 
