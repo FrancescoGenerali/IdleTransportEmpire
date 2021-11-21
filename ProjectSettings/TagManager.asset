@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Building
+  - MG_Goal
+  - MG_Start
   layers:
   - Default
   - TransparentFX
