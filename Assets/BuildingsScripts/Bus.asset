@@ -17,4 +17,5 @@ MonoBehaviour:
   coefficient: 1.07
   initialTime: 0.6
   initialRevenue: 1
-  initialProductivity: 1.67
+  shouldStartFree: 1
+  nextMult: 190000003200000064000000c80000002c01000090010000

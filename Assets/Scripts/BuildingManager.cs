@@ -15,7 +15,7 @@ public class BuildingManager : MonoBehaviour
     private GameObject nextMultBar;
 
     [HideInInspector]
-    public int owned, multiplier, nextMult;
+    public int owned, multiplier, nextMult, prevNextMult, barCount;
     [HideInInspector]
     public float productionTime;
     [HideInInspector]
@@ -23,12 +23,9 @@ public class BuildingManager : MonoBehaviour
     [HideInInspector]
     public bool reachMax;
 
-    //Need for fillbar
-    private int barCount, prevNextMult;
-
     private void Awake()
     {
-        if (productionTime == 0)
+        if (Data.currency == 0)
         {
             initialReset();
         }
@@ -37,7 +34,12 @@ public class BuildingManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(gainCurrency());
-        cost = calculateCost();
+
+        if (thisBuildType.shouldStartFree && owned == 0)
+            cost = 0;
+        else
+            cost = calculateCost();
+
         updateUI();
     }
 
@@ -56,6 +58,8 @@ public class BuildingManager : MonoBehaviour
     {
         if (reachMax)
             costUI.text = "MAX";
+        else if (cost == 0)
+            costUI.text = "FREE";
         else
             costUI.text = CashConverter.doubleToString(cost);
 

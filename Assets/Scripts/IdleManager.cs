@@ -10,7 +10,9 @@ public class IdleManager : MonoBehaviour
     
     private void Awake()
     {
-        if (Data.prestige == 0)
+        if (SaveAndLoad.haveToLoad)
+            SaveAndLoad.LoadFromJson();
+        else if (Data.prestige == 0)
         {
             Data.prestige = 1;
             Data.bonusPrestige = 1;
@@ -38,6 +40,7 @@ public class IdleManager : MonoBehaviour
             Data.currency += (DateTime.Now.AddHours(1) - DateTime.Now).TotalSeconds * Data.calculateTotalProduction(Buildings);
         }
 
+        //Erase Data
         if (Input.GetKeyDown(KeyCode.R))
         {
             resetSave();
