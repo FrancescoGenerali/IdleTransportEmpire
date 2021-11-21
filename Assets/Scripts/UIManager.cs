@@ -8,10 +8,12 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI money;
     public TextMeshProUGUI prestige;
+    public TextMeshProUGUI prestigeMultiplier;
 
     void Update()
     {
         money.text = CashConverter.doubleToString(Data.currency);
-        prestige.text = CashConverter.doubleToString(Data.prestige);
+        prestige.text = Data.prestige.ToString();
+        prestigeMultiplier.text = "x" + Data.bonusPrestige;
     }
 }

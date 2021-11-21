@@ -38,6 +38,11 @@ public class IdleManager : MonoBehaviour
             Data.currency += (DateTime.Now.AddHours(1) - DateTime.Now).TotalSeconds * Data.calculateTotalProduction(Buildings);
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resetSave();
+        }
+
         //-----------------//
     }
 
