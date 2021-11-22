@@ -25658,7 +25658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8525979986386837784, guid: 0d9ab0a3987146a4692bff74efd4a138, type: 3}
       propertyPath: costNextMap
-      value: 5000000000
+      value: 20000000000
       objectReference: {fileID: 0}
     - target: {fileID: 8525979986643817822, guid: 0d9ab0a3987146a4692bff74efd4a138, type: 3}
       propertyPath: m_IsActive

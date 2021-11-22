@@ -23,12 +23,15 @@ public class BuildingManager : MonoBehaviour
     [HideInInspector]
     public bool reachMax;
 
+    private AudioSource audioSource;
+
     private void Awake()
     {
         if (Data.currency == 0)
         {
             initialReset();
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -47,6 +50,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (Data.currency >= cost && !reachMax)
         {
+            audioSource.Play();
             raiseOwned();
             Data.currency -= cost;
             cost = calculateCost();
