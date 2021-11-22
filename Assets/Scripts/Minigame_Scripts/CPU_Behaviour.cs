@@ -22,7 +22,7 @@ public class CPU_Behaviour : MonoBehaviour
     {
         animator.speed = speed;
 
-        animator.SetBool("StartAnim", true);
+        StartCoroutine(waitBeforeStart());
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class CPU_Behaviour : MonoBehaviour
         {
             numberOfPassengers--;
             if (numberOfPassengers == 0)
-                return;
+                break;
         }
     }
 
@@ -50,5 +50,11 @@ public class CPU_Behaviour : MonoBehaviour
         {
             passengersGetInVehicle();
         }
+    }
+
+    IEnumerator waitBeforeStart()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("StartAnim", true);
     }
 }

@@ -15,7 +15,7 @@ public class BuildingManager : MonoBehaviour
     private GameObject nextMultBar;
 
     [HideInInspector]
-    public int owned, multiplier, nextMult, prevNextMult, barCount;
+    public int owned, nextMult, prevNextMult, barCount;
     [HideInInspector]
     public float productionTime;
     [HideInInspector]
@@ -76,7 +76,6 @@ public class BuildingManager : MonoBehaviour
         {
             reachNextMult();
             productionTime /= 2;
-            multiplier++;
         }
     }
 
@@ -103,7 +102,7 @@ public class BuildingManager : MonoBehaviour
 
     public double calculateProductivity()
     {
-        return (thisBuildType.initialRevenue / productionTime) * owned * multiplier *Data.bonusPrestige;
+        return (thisBuildType.initialRevenue / productionTime) * owned *Data.bonusPrestige;
     }
 
     public double calculateCost()
@@ -123,7 +122,6 @@ public class BuildingManager : MonoBehaviour
     public void initialReset()
     {
         owned = 0;
-        multiplier = 1;
         barCount = 0;
         prevNextMult = 0;
         nextMult = thisBuildType.nextMult[0];

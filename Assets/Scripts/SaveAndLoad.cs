@@ -24,7 +24,6 @@ public static class SaveAndLoad
         {
             dataJ.listBuild[i] = new BuildJ();
             dataJ.listBuild[i].owned = buildingInScene[i].GetComponent<BuildingManager>().owned;
-            dataJ.listBuild[i].multiplier = buildingInScene[i].GetComponent<BuildingManager>().multiplier;
             dataJ.listBuild[i].nextMult = buildingInScene[i].GetComponent<BuildingManager>().nextMult;
             dataJ.listBuild[i].prevNextMult = buildingInScene[i].GetComponent<BuildingManager>().prevNextMult;
             dataJ.listBuild[i].barCount = buildingInScene[i].GetComponent<BuildingManager>().barCount;
@@ -67,7 +66,6 @@ public static class SaveAndLoad
         for (int i = 0; i < dataJ.listBuild.Length; i++)
         {
             buildingInScene[i].GetComponent<BuildingManager>().owned = dataJ.listBuild[i].owned;
-            buildingInScene[i].GetComponent<BuildingManager>().multiplier = dataJ.listBuild[i].multiplier;
             buildingInScene[i].GetComponent<BuildingManager>().nextMult = dataJ.listBuild[i].nextMult;
             buildingInScene[i].GetComponent<BuildingManager>().prevNextMult = dataJ.listBuild[i].prevNextMult;
             buildingInScene[i].GetComponent<BuildingManager>().barCount = dataJ.listBuild[i].barCount;
@@ -93,6 +91,6 @@ public class JsonData
 [Serializable]
 public class BuildJ
 {
-    public int owned, multiplier, nextMult, prevNextMult, barCount;
+    public int owned, nextMult, prevNextMult, barCount;
     public float productionTime;
 }

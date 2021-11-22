@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Idle_2.unity
     guid: 5e6496c9fa50b924abcdaee12707c427
+  - enabled: 1
+    path: Assets/Scenes/Minigame_2.unity
+    guid: 477b26e8611537a4ca9c83b8c81de11b
+  - enabled: 1
+    path: Assets/Scenes/Idle_3.unity
+    guid: 5aa93b4be6883014ea3d9458a30c117e
   m_configObjects: {}

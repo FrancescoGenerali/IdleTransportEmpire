@@ -17,7 +17,7 @@ public static class Data
 
         while(tempPrestige > 1)
         {
-            bonusPrestige += 0.2f;
+            bonusPrestige += 0.5f;
             tempPrestige--;
         }
         return bonusPrestige;

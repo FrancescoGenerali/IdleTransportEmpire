@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class IdleManager : MonoBehaviour
 {
-    private double totalProduction;
+    public double costNextMap;
+    public TextMeshProUGUI costNextMapUI;
     
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class IdleManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(autosave());
+        costNextMapUI.text = CashConverter.doubleToString(costNextMap);
     }
     
     void Update()
@@ -45,11 +48,14 @@ public class IdleManager : MonoBehaviour
 
     public void nextScene()
     {
-        Data.currency = 0;
-        Data.prestige++;
-        Data.updateBonusPrestige();
-        Data.actualScene++;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (Data.currency > costNextMap)
+        {
+            Data.currency = 0;
+            Data.prestige++;
+            Data.updateBonusPrestige();
+            Data.actualScene++;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     IEnumerator autosave()
