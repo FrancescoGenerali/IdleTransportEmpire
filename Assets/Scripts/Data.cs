@@ -12,12 +12,12 @@ public static class Data
 
     public static float updateBonusPrestige()
     {
-        bonusPrestige = 1;
+        bonusPrestige = 0;
         int tempPrestige = prestige;
 
         while(tempPrestige > 1)
         {
-            bonusPrestige += 0.5f;
+            bonusPrestige += 5f;
             tempPrestige--;
         }
         return bonusPrestige;

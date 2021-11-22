@@ -50,7 +50,7 @@ public class IdleManager : MonoBehaviour
     {
         if (Data.currency > costNextMap)
         {
-            Data.currency = 0;
+            Data.currency = 0d;
             Data.prestige++;
             Data.updateBonusPrestige();
             Data.actualScene++;

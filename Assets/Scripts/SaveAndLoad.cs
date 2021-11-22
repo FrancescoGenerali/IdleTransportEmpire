@@ -43,9 +43,6 @@ public static class SaveAndLoad
 
         Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds - 3600) * Data.totalProduction); //3600 fixes one hour late during conversion
         
-        if (double.IsNaN(Data.currency))
-            Data.currency = dataJ.currency; //this bug happened just one time and I wasn't able to replicate it
-        
         Data.prestige = dataJ.prestige;
         Data.bonusPrestige = dataJ.bonusPrestige;
         Data.actualScene = dataJ.actualSceneNumber;

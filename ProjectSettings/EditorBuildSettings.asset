@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Idle_3.unity
     guid: 5aa93b4be6883014ea3d9458a30c117e
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: b1f955e4363704b488d08e202aa9fcfb
   m_configObjects: {}
