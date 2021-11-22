@@ -30,6 +30,8 @@ public static class SaveAndLoad
             dataJ.listBuild[i].productionTime = buildingInScene[i].GetComponent<BuildingManager>().productionTime;
         }
 
+        dataJ.jTotalProduction = Data.calculateTotalProduction(buildingInScene);
+
         dataJ.jLastLog = DateTime.Now.ToFileTimeUtc(); //DateTime need conversion 'cause isn't serializable
 
         string json = JsonUtility.ToJson(dataJ, true);
@@ -41,7 +43,7 @@ public static class SaveAndLoad
         string json = File.ReadAllText(Application.dataPath + "/Progress.json");
         JsonData dataJ = JsonUtility.FromJson<JsonData>(json);
 
-        Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds - 3600) * Data.totalProduction); //3600 fixes one hour late during conversion
+        Data.currency = dataJ.currency + (((DateTime.Now - DateTime.FromFileTimeUtc(dataJ.jLastLog)).TotalSeconds - 3600) * dataJ.jTotalProduction); //3600 fixes one hour late during conversion
         
         Data.prestige = dataJ.prestige;
         Data.bonusPrestige = dataJ.bonusPrestige;
@@ -82,6 +84,7 @@ public class JsonData
     public float bonusPrestige;
     public int actualSceneNumber;
     public long jLastLog;
+    public double jTotalProduction;
     public BuildJ[] listBuild;
 }
 
